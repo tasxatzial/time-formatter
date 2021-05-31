@@ -1,10 +1,10 @@
-# Time period formatter
+# Time formatter
 
-A small class that can be used for printing time periods represented by long numbers into a human readable format. The printed number will always be an approximation of the time period. This can be useful when we want a rough estimate of the time passed but don't really care about the exact numbers.
+A small class that can be used for printing a time period represented by a long number into a human readable format. The printed number will always be an approximation of the time represented by the long number. This can be useful when we want a rough estimate but don't really care about the exact numbers.
 
 ## Usage
 
-A typical usage consists of the following code sequence
+A typical usage consists of the following:
 
 ```java
 long startTime = System.nanoTime();

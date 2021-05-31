@@ -51,10 +51,10 @@ public class Time {
             double secs = toSec(_longValue);
             return roundToDecimal(secs, 1) + "s";
         }
-	if (msec > 100) {
-            double secs = toSec(_longValue);
-            return roundToDecimal(secs, 2) + "s";
-	}
+        if (msec > 100) {
+                double secs = toSec(_longValue);
+                return roundToDecimal(secs, 2) + "s";
+        }
         if (msec > 20) {
             return roundToInt(msec) + "ms";
         }
