@@ -29,29 +29,29 @@ public class Time {
      * @return
      */
     public String toString() {
-        double msec = toMsec(_longValue);
+        double msec = this.toMsec();
         if (msec > toMsec(fromHr(1))) {
-            double hours = toHr(_longValue);
-            int intHours = countHour(_longValue);
+            double hours = this.toHr();
+            int intHours = this.countHour();
             double mins = toMin(fromHr(hours) - fromHr(intHours));
             return intHours + "h " + roundToInt(mins) + "m";
         }
         if (msec > toMsec(fromMin(1))) {
-            double mins = toMin(_longValue);
-            int intMins = countMin(_longValue);
+            double mins = this.toMin();
+            int intMins = this.countMin();
             double secs = toSec(fromMin(mins) - fromMin(intMins));
             return intMins + "m " + roundToInt(secs) + "s";
         }
         if (msec > toMsec(fromSec(20))) {
-            double secs = toSec(_longValue);
+            double secs = this.toSec();
             return roundToInt(secs) + "s";
         }
         if (msec > toMsec(fromSec(2))) {
-            double secs = toSec(_longValue);
+            double secs = this.toSec();
             return roundToDecimal(secs, 1) + "s";
         }
         if (msec > 100) {
-            double secs = toSec(_longValue);
+            double secs = this.toSec();
             return roundToDecimal(secs, 2) + "s";
         }
         if (msec > 20) {
