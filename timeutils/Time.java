@@ -84,7 +84,7 @@ public class Time {
     }
 
     /**
-     * Returns the hours (int) from the specified long value
+     * Returns the hours (int) contained in the specified nanoseconds (long)
      * @param value
      * @return
      */
@@ -93,7 +93,15 @@ public class Time {
     }
 
     /**
-     * Returns the minutes (int) from the specified long value
+     * Returns the hours (int) contained in this object
+     * @return
+     */
+    public int countHour() {
+        return Time.countHour(_longValue);
+    }
+
+    /**
+     * Returns the minutes (int) contained in the specified nanoseconds (long)
      * @param value
      * @return
      */
@@ -102,7 +110,15 @@ public class Time {
     }
 
     /**
-     * Returns the seconds (int) from the specified long value
+     * Returns the minutes (int) contained in this object
+     * @return
+     */
+    public int countMin() {
+        return Time.countMin(_longValue);
+    }
+
+    /**
+     * Returns the seconds (int) contained in the specified nanoseconds (long)
      * @param value
      * @return
      */
@@ -111,7 +127,15 @@ public class Time {
     }
 
     /**
-     * Returns the mseconds (int) from the specified long value
+     * Returns the seconds (int) contained in this object
+     * @return
+     */
+    public int countSec() {
+        return Time.countSec(_longValue);
+    }
+
+    /**
+     * Returns the msecs (int) contained in the specified nanoseconds (long)
      * @param value
      * @return
      */
@@ -120,7 +144,15 @@ public class Time {
     }
 
     /**
-     * Returns the long value from a given time in hours
+     * Returns the msecs (int) contained in this object
+     * @return
+     */
+    public int countMsec() {
+        return Time.countMsec(_longValue);
+    }
+
+    /**
+     * Returns the nanoseconds (long) from a given time in hours (double)
      * @param value
      * @return
      */
@@ -129,7 +161,7 @@ public class Time {
     }
 
     /**
-     * Returns the long value from a given time in minutes
+     * Returns the nanoseconds (long) from a given time in minutes (double)
      * @param value
      * @return
      */
@@ -138,7 +170,7 @@ public class Time {
     }
 
     /**
-     * Returns the long value from a given time in seconds
+     * Returns the nanoseconds (long) from a given time in seconds (double)
      * @param value
      * @return
      */
@@ -147,7 +179,7 @@ public class Time {
     }
 
     /**
-     * Returns the long value from a given time in mseconds
+     * Returns the nanoseconds (long) from a given time in msecs (double)
      * @param value
      * @return
      */
@@ -156,7 +188,7 @@ public class Time {
     }
 
     /**
-     * Returns the time in mseconds (decimal) from the specified long value
+     * Converts the specified time in nanoseconds (long) to msecs (double)
      * @param value
      * @return
      */
@@ -165,7 +197,15 @@ public class Time {
     }
 
     /**
-     * Returns the time in seconds (decimal) from the specified long value
+     * Returns the time in msecs (double) from this object
+     * @return
+     */
+    public double toMsec() {
+        return Time.toMsec(_longValue);
+    }
+
+    /**
+     * Converts the specified time in nanoseconds (long) to seconds (double)
      * @param value
      * @return
      */
@@ -174,7 +214,15 @@ public class Time {
     }
 
     /**
-     * Returns the time in minutes (decimal) from the specified long value
+     * Returns the time in seconds (double) from this object
+     * @return
+     */
+    public double toSec() {
+        return Time.toSec(_longValue);
+    }
+
+    /**
+     * Converts the specified time in nanoseconds (long) to minutes (double)
      * @param value
      * @return
      */
@@ -183,7 +231,15 @@ public class Time {
     }
 
     /**
-     * Returns the time in hours (decimal) from the specified long value
+     * Returns the time in minutes (double) from this object
+     * @return
+     */
+    public double toMin() {
+        return Time.toMin(_longValue);
+    }
+
+    /**
+     * Converts the specified time in nanoseconds (long) to hours (double)
      * @param value
      * @return
      */
@@ -192,7 +248,15 @@ public class Time {
     }
 
     /**
-     * Adds the specified time to this Time.
+     * Returns the time in hours (double) from this object
+     * @return
+     */
+    public double toHr() {
+        return Time.toHr(_longValue);
+    }
+
+    /**
+     * Adds the specified time to this object
      * @param time
      */
     public void addTime(Time time) {
@@ -200,7 +264,7 @@ public class Time {
     }
 
     /**
-     * Returns the long value associated with this Time
+     * Returns the long value associated with this object
      * @return
      */
     public long getValue() {
