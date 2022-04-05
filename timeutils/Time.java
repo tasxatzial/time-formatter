@@ -93,7 +93,7 @@ public class Time {
     }
 
     /**
-     * Returns the hours (int) contained in this object
+     * Returns the hours (int) contained in this Time
      * @return
      */
     public int countHour() {
@@ -110,7 +110,7 @@ public class Time {
     }
 
     /**
-     * Returns the minutes (int) contained in this object
+     * Returns the minutes (int) contained in this Time
      * @return
      */
     public int countMin() {
@@ -127,7 +127,7 @@ public class Time {
     }
 
     /**
-     * Returns the seconds (int) contained in this object
+     * Returns the seconds (int) contained in this Time
      * @return
      */
     public int countSec() {
@@ -144,7 +144,7 @@ public class Time {
     }
 
     /**
-     * Returns the msecs (int) contained in this object
+     * Returns the msecs (int) contained in this Time
      * @return
      */
     public int countMsec() {
@@ -197,7 +197,7 @@ public class Time {
     }
 
     /**
-     * Returns the time in msecs (double) from this object
+     * Returns the time in msecs (double)
      * @return
      */
     public double toMsec() {
@@ -214,7 +214,7 @@ public class Time {
     }
 
     /**
-     * Returns the time in seconds (double) from this object
+     * Returns the time in seconds (double)
      * @return
      */
     public double toSec() {
@@ -231,7 +231,7 @@ public class Time {
     }
 
     /**
-     * Returns the time in minutes (double) from this object
+     * Returns the time in minutes (double)
      * @return
      */
     public double toMin() {
@@ -248,7 +248,7 @@ public class Time {
     }
 
     /**
-     * Returns the time in hours (double) from this object
+     * Returns the time in hours (double)
      * @return
      */
     public double toHr() {
@@ -256,7 +256,7 @@ public class Time {
     }
 
     /**
-     * Adds the specified time to this object
+     * Adds the specified time to this Time
      * @param time
      */
     public void addTime(Time time) {
@@ -264,7 +264,7 @@ public class Time {
     }
 
     /**
-     * Returns the long value associated with this object
+     * Returns the time in nanoseconds (long)
      * @return
      */
     public long getValue() {
