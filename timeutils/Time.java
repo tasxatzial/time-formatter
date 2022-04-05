@@ -1,21 +1,21 @@
 package timeutils;
 
 /**
- * This class creates an object from a long number and provides utilities to
- * convert from time (long) to hr, m, s,ms (double) and vice versa.
- * 
+ * This class creates an object from a long number representing a time period in nanoseconds
+ * and provides functions that extract the hours, minutes, seconds, milliseconds.
+ *
  * The toString() method returns a human readable format of the time represented
  * by this object. It will be an approximation of the actual time and can be used
  * when we need a rough estimate but don't need the exact value.
  *
- * Periods > 1 hour are formatted as Xhr Ym (e.g. 1hr 12m)
+ * Periods > 1 hour are formatted as Xh Ym (e.g. 1h 12m)
  * Periods > 1 min are formatted as Xm Ys (e.g. 1m 12s)
  * Periods > 20 sec are formatted as Xs (e.g. 22s)
  * Periods > 2 sec are formatted as X.Ys (e.g. 5.4s)
  * Periods > 100 ms are formatted as 0.YYs (e.g. 0.73s)
  * Periods > 20 ms are formatted as XXms (e.g. 34ms)
  * Periods > 2 ms are formatted as X.Yms (e.g. 2.6ms)
- * Periods < 2 ms are formatted as X.YYms (e.g. 1.65ms)
+ * Periods <= 2 ms are formatted as X.YYms (e.g. 1.65ms)
  */
 public class Time {
     private long _longValue;
@@ -33,8 +33,7 @@ public class Time {
         if (msec > toMsec(fromHr(1))) {
             double hours = toHr(_longValue);
             int intHours = countHour(_longValue);
-            double secs = toSec(fromHr(hours) - fromHr(intHours));
-            double mins = toMin(fromSec(secs));
+            double mins = toMin(fromHr(hours) - fromHr(intHours));
             return intHours + "h " + roundToInt(mins) + "m";
         }
         if (msec > toMsec(fromMin(1))) {
@@ -52,8 +51,8 @@ public class Time {
             return roundToDecimal(secs, 1) + "s";
         }
         if (msec > 100) {
-                double secs = toSec(_longValue);
-                return roundToDecimal(secs, 2) + "s";
+            double secs = toSec(_longValue);
+            return roundToDecimal(secs, 2) + "s";
         }
         if (msec > 20) {
             return roundToInt(msec) + "ms";
