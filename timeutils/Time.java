@@ -1,12 +1,11 @@
 package timeutils;
 
 /**
- * This class creates an object from a long number representing a time period in nanoseconds
- * and provides functions that convert it to hours, minutes, seconds, milliseconds, microseconds
- * and vice versa.
+ * Creates an object from a long number representing a time period in nanoseconds.
+ * Additionally, it provides functions to convert the time period into hours, minutes, seconds,
+ * milliseconds, and microseconds, and to convert these units back to nanoseconds.
  *
- * The toString() method returns an approximation of the time printed in a human-readable format.
- * It is useful when we need a rough estimate but not the exact value.
+ * The toString() method returns an approximation of the time period in a human-readable format.
  *
  * Periods > 1 hour are formatted as Xh Ym (e.g. 1h 12m)
  * Periods > 1 min are formatted as Xm Ys (e.g. 1m 12s)
