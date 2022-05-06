@@ -2,20 +2,23 @@ package timeutils;
 
 /**
  * This class creates an object from a long number representing a time period in nanoseconds
- * and provides functions that extract the hours, minutes, seconds, milliseconds.
+ * and provides functions that convert it to hours, minutes, seconds, milliseconds, microseconds
+ * and vice versa.
  *
- * The toString() method returns a human readable format of the time represented
- * by this object. It will be an approximation of the actual time and can be used
- * when we need a rough estimate but don't need the exact value.
+ * The toString() method returns an approximation of the time printed in a human-readable format.
+ * It is useful when we need a rough estimate but not the exact value.
  *
  * Periods > 1 hour are formatted as Xh Ym (e.g. 1h 12m)
  * Periods > 1 min are formatted as Xm Ys (e.g. 1m 12s)
- * Periods > 20 sec are formatted as Xs (e.g. 22s)
- * Periods > 2 sec are formatted as X.Ys (e.g. 5.4s)
- * Periods > 100 ms are formatted as 0.YYs (e.g. 0.73s)
- * Periods > 20 ms are formatted as XXms (e.g. 34ms)
- * Periods > 2 ms are formatted as X.Yms (e.g. 2.6ms)
- * Periods <= 2 ms are formatted as X.YYms (e.g. 1.65ms)
+ * Periods > 10 sec are formatted as X.Ys (e.g. 22.1s)
+ * Periods > 1 sec are formatted as X.YYs (e.g. 5.42s)
+ * Periods > 100 milli sec are formatted as Xms (e.g. 342ms)
+ * Periods > 10 milli sec are formatted as X.Yms (e.g. 34.2ms)
+ * Periods > 1 milli sec are formatted as X.YYms (e.g. 3.42ms)
+ * Periods > 100 micro sec are formatted as Xμs (e.g. 123μs)
+ * Periods > 10 micro sec are formatted as X.Yμs (e.g. 12.3μs)
+ * Periods > 1 micro sec are formatted as X.YYμs (e.g. 1.23μs)
+ * Else periods are formatted as Xns (e.g. 12ns)
  */
 public class Time {
     private long _longValue;
@@ -42,23 +45,33 @@ public class Time {
             return intMins + "m " + roundToInt(secs) + "s";
         }
         double secs = this.toSec();
-        if (secs > 20) {
-            return roundToInt(secs) + "s";
-        }
-        if (secs > 2) {
+        if (secs > 10) {
             return roundToDecimal(secs, 1) + "s";
         }
-        double msec = this.toMilliSec();
-        if (msec > 100) {
+        if (secs > 1) {
             return roundToDecimal(secs, 2) + "s";
         }
-        if (msec > 20) {
-            return roundToInt(msec) + "ms";
+        double milliSec = this.toMilliSec();
+        if (milliSec > 100) {
+            return roundToInt(milliSec) + "ms";
         }
-        if (msec > 2) {
-            return roundToDecimal(msec, 1) + "ms";
+        if (milliSec > 10) {
+            return roundToDecimal(milliSec, 1) + "ms";
         }
-        return roundToDecimal(msec, 2) + "ms";
+        if (milliSec > 1) {
+            return roundToDecimal(milliSec, 2) + "ms";
+        }
+        double microSec = this.toMicroSec();
+        if (microSec > 100) {
+            return roundToInt(microSec) + "μs";
+        }
+        if (microSec > 10) {
+            return roundToDecimal(microSec, 1) + "μs";
+        }
+        if (microSec > 1) {
+            return roundToDecimal(microSec, 2) + "μs";
+        }
+        return _longValue + "ns";
     }
 
     /**
