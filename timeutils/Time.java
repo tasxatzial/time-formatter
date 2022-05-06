@@ -48,7 +48,7 @@ public class Time {
         if (secs > 2) {
             return roundToDecimal(secs, 1) + "s";
         }
-        double msec = this.toMsec();
+        double msec = this.toMilliSec();
         if (msec > 100) {
             return roundToDecimal(secs, 2) + "s";
         }
@@ -133,20 +133,37 @@ public class Time {
     }
 
     /**
-     * Returns the msecs (int) contained in the specified nanoseconds (long)
+     * Returns the milli secs (int) contained in the specified nanoseconds (long)
      * @param value
      * @return
      */
-    public static int countMsec(long value) {
-        return (int) Math.floor(toMsec(value));
+    public static int countMilliSec(long value) {
+        return (int) Math.floor(toMilliSec(value));
     }
 
     /**
-     * Returns the msecs (int) contained in this Time
+     * Returns the milli secs (int) contained in this Time
      * @return
      */
-    public int countMsec() {
-        return Time.countMsec(_longValue);
+    public int countMilliSec() {
+        return Time.countMilliSec(_longValue);
+    }
+
+    /**
+     * Returns the micro secs (int) contained in the specified nanoseconds (long)
+     * @param value
+     * @return
+     */
+    public static int countMicroSec(long value) {
+        return (int) Math.floor(toMicroSec(value));
+    }
+
+    /**
+     * Returns the micro secs (int) contained in this Time
+     * @return
+     */
+    public int countMicroSec() {
+        return Time.countMicroSec(_longValue);
     }
 
     /**
@@ -177,46 +194,38 @@ public class Time {
     }
 
     /**
-     * Returns the nanoseconds (long) from a given time in msecs (double)
+     * Returns the nanoseconds (long) from a given time in milli secs (double)
      * @param value
      * @return
      */
-    public static long fromMsec(double value) {
+    public static long fromMilliSec(double value) {
         return (long) (value * 1e6);
     }
 
     /**
-     * Converts the specified time in nanoseconds (long) to msecs (double)
+     * Returns the nanoseconds (long) from a given time in micro secs (double)
      * @param value
      * @return
      */
-    public static double toMsec(long value) {
-        return value / 1e6;
+    public static long fromMicroSec(double value) {
+        return (long) (value * 1e3);
     }
 
     /**
-     * Returns the time in msecs (double)
-     * @return
-     */
-    public double toMsec() {
-        return Time.toMsec(_longValue);
-    }
-
-    /**
-     * Converts the specified time in nanoseconds (long) to seconds (double)
+     * Converts the specified time in nanoseconds (long) to hours (double)
      * @param value
      * @return
      */
-    public static double toSec(long value) {
-        return value / 1e9;
+    public static double toHr(long value) {
+        return value / 3.6e12;
     }
 
     /**
-     * Returns the time in seconds (double)
+     * Returns the time in hours (double)
      * @return
      */
-    public double toSec() {
-        return Time.toSec(_longValue);
+    public double toHr() {
+        return Time.toHr(_longValue);
     }
 
     /**
@@ -237,20 +246,54 @@ public class Time {
     }
 
     /**
-     * Converts the specified time in nanoseconds (long) to hours (double)
+     * Converts the specified time in nanoseconds (long) to seconds (double)
      * @param value
      * @return
      */
-    public static double toHr(long value) {
-        return value / 3.6e12;
+    public static double toSec(long value) {
+        return value / 1e9;
     }
 
     /**
-     * Returns the time in hours (double)
+     * Returns the time in seconds (double)
      * @return
      */
-    public double toHr() {
-        return Time.toHr(_longValue);
+    public double toSec() {
+        return Time.toSec(_longValue);
+    }
+
+    /**
+     * Converts the specified time in nanoseconds (long) to milli secs (double)
+     * @param value
+     * @return
+     */
+    public static double toMilliSec(long value) {
+        return value / 1e6;
+    }
+
+    /**
+     * Returns the time in milli secs (double)
+     * @return
+     */
+    public double toMilliSec() {
+        return Time.toMilliSec(_longValue);
+    }
+
+    /**
+     * Converts the specified time in nanoseconds (long) to micro secs (double)
+     * @param value
+     * @return
+     */
+    public static double toMicroSec(long value) {
+        return value / 1e3;
+    }
+
+    /**
+     * Returns the time in micro secs (double)
+     * @return
+     */
+    public double toMicroSec() {
+        return Time.toMicroSec(_longValue);
     }
 
     /**
