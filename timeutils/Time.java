@@ -7,16 +7,14 @@ package timeutils;
  *
  * The toString() method returns an approximation of the time period in a human-readable format.
  *
- * Periods > 1 hour are formatted as Xh Ym (e.g. 1h 12m)
- * Periods > 1 min are formatted as Xm Ys (e.g. 1m 12s)
- * Periods > 10 sec are formatted as X.Ys (e.g. 22.1s)
- * Periods > 1 sec are formatted as X.YYs (e.g. 5.42s)
- * Periods > 100 milli sec are formatted as Xms (e.g. 342ms)
- * Periods > 10 milli sec are formatted as X.Yms (e.g. 34.2ms)
- * Periods > 1 milli sec are formatted as X.YYms (e.g. 3.42ms)
- * Periods > 100 micro sec are formatted as Xμs (e.g. 123μs)
- * Periods > 10 micro sec are formatted as X.Yμs (e.g. 12.3μs)
- * Periods > 1 micro sec are formatted as X.YYμs (e.g. 1.23μs)
+ * Periods > 1 hour are formatted as Xh Ymin (e.g. 1h 12min)
+ * Periods > 1 min are formatted as Xmin Ys (e.g. 1min 12s)
+ * Periods > 10 sec are formatted as Xs (e.g. 22s)
+ * Periods > 1 sec are formatted as X.Ys (e.g. 5.4s)
+ * Periods > 10 milli sec are formatted as Xms (e.g. 34ms)
+ * Periods > 1 milli sec are formatted as X.Yms (e.g. 3.4ms)
+ * Periods > 10 micro sec are formatted as Xμs (e.g. 12μs)
+ * Periods > 1 micro sec are formatted as X.Yμs (e.g. 1.2μs)
  * Else periods are formatted as Xns (e.g. 12ns)
  */
 public class Time {
@@ -34,41 +32,63 @@ public class Time {
         double hours = this.toHr();
         if (hours > 1) {
             int intHours = this.countHour();
-            double mins = toMin(fromHr(hours) - fromHr(intHours));
-            return intHours + "h " + roundToInt(mins) + "m";
+            long intMins = Math.round(toMin(fromHr(hours) - fromHr(intHours)));
+            if (intMins == 60) {
+                return (intHours + 1) + "h";
+            } else if (intMins == 0) {
+                return intHours + "h";
+            }
+            return intHours + "h " + intMins + "min";
         }
         double mins = this.toMin();
         if (mins > 1) {
             int intMins = this.countMin();
-            double secs = toSec(fromMin(mins) - fromMin(intMins));
-            return intMins + "m " + roundToInt(secs) + "s";
+            long intSecs = Math.round(toSec(fromMin(mins) - fromMin(intMins)));
+            if (intSecs == 60) {
+                if (intMins == 59) {
+                    return "1h";
+                }
+                return (intMins + 1) + "min";
+            } else if (intSecs == 0) {
+                if (intMins == 60) {
+                    return "1h";
+                }
+                return intMins + "min";
+            }
+            return intMins + "min " + intSecs + "s";
         }
         double secs = this.toSec();
         if (secs > 10) {
-            return roundToDecimal(secs, 1) + "s";
+            long intSecs = Math.round(secs);
+            if (intSecs == 60) {
+                return "1min";
+            }
+            return intSecs + "s";
         }
         if (secs > 1) {
-            return roundToDecimal(secs, 2) + "s";
+            return roundToDecimal(secs, 1) + "s";
         }
         double milliSec = this.toMilliSec();
-        if (milliSec > 100) {
-            return roundToInt(milliSec) + "ms";
-        }
         if (milliSec > 10) {
-            return roundToDecimal(milliSec, 1) + "ms";
+            long intMilliSec = Math.round(milliSec);
+            if (intMilliSec == 1000) {
+                return "1s";
+            }
+            return intMilliSec + "ms";
         }
         if (milliSec > 1) {
-            return roundToDecimal(milliSec, 2) + "ms";
+            return roundToDecimal(milliSec, 1) + "ms";
         }
         double microSec = this.toMicroSec();
-        if (microSec > 100) {
-            return roundToInt(microSec) + "μs";
-        }
         if (microSec > 10) {
-            return roundToDecimal(microSec, 1) + "μs";
+            long intMicroSec = Math.round(microSec);
+            if (intMicroSec == 1000) {
+                return "1ms";
+            }
+            return intMicroSec + "μs";
         }
         if (microSec > 1) {
-            return roundToDecimal(microSec, 2) + "μs";
+            return roundToDecimal(microSec, 1) + "μs";
         }
         return _longValue + "ns";
     }
@@ -82,15 +102,6 @@ public class Time {
     public static double roundToDecimal(double value, int digits) {
         double pow = Math.pow(10, digits);
         return Math.round(value * pow) / pow;
-    }
-
-    /**
-     * Rounds the specified value to the nearest integer
-     * @param value
-     * @return
-     */
-    public static int roundToInt(double value) {
-        return (int) Math.round(value);
     }
 
     /**
