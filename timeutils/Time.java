@@ -29,9 +29,17 @@ public class Time {
      * @return
      */
     public String toString() {
-        double hours = this.toHr();
+        return Time.toString(_longValue);
+    }
+
+    /**
+     * Returns a string representation of the given time period
+     * @return
+     */
+    public static String toString(long period) {
+        double hours = Time.toHr(period);
         if (hours > 1) {
-            int intHours = this.countHour();
+            int intHours = Time.countHour(period);
             long intMins = Math.round(toMin(fromHr(hours) - fromHr(intHours)));
             if (intMins == 60) {
                 return (intHours + 1) + "h";
@@ -40,9 +48,9 @@ public class Time {
             }
             return intHours + "h " + intMins + "min";
         }
-        double mins = this.toMin();
+        double mins = Time.toMin(period);
         if (mins > 1) {
-            int intMins = this.countMin();
+            int intMins = Time.countMin(period);
             long intSecs = Math.round(toSec(fromMin(mins) - fromMin(intMins)));
             if (intSecs == 60) {
                 if (intMins == 59) {
@@ -57,7 +65,7 @@ public class Time {
             }
             return intMins + "min " + intSecs + "s";
         }
-        double secs = this.toSec();
+        double secs = Time.toSec(period);
         if (secs > 10) {
             long intSecs = Math.round(secs);
             if (intSecs == 60) {
@@ -68,7 +76,7 @@ public class Time {
         if (secs > 1) {
             return roundToDecimal(secs, 1) + "s";
         }
-        double milliSec = this.toMilliSec();
+        double milliSec = Time.toMilliSec(period);
         if (milliSec > 10) {
             long intMilliSec = Math.round(milliSec);
             if (intMilliSec == 1000) {
@@ -79,7 +87,7 @@ public class Time {
         if (milliSec > 1) {
             return roundToDecimal(milliSec, 1) + "ms";
         }
-        double microSec = this.toMicroSec();
+        double microSec = Time.toMicroSec(period);
         if (microSec > 10) {
             long intMicroSec = Math.round(microSec);
             if (intMicroSec == 1000) {
@@ -90,7 +98,7 @@ public class Time {
         if (microSec > 1) {
             return roundToDecimal(microSec, 1) + "μs";
         }
-        return _longValue + "ns";
+        return period + "ns";
     }
 
     /**
