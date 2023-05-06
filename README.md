@@ -12,7 +12,12 @@ import timeutils.Time;
 long startTime = System.nanoTime();
 ...
 long endTime = System.nanoTime();
+
+// Create a Time instance
 System.out.println(new Time(endTime - startTime));
+
+// Do not create a Time instance, use the static method instead
+System.out.println(Time.toString(endTime - startTime));
 ```
 
 ## Examples
