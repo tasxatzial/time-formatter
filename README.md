@@ -24,6 +24,7 @@ System.out.println(Time.toString(endTime - startTime));
 
 | Period         | Format   | Approx. Percent Error |
 |----------------|----------|-------|
+| 423            | 423ns    | 0%    |
 | 423423         | 423μs    | 0.1%  |
 | 3423423        | 3.4ms    | 0.7%  |
 | 53423423       | 53ms     | 0.8%  |
